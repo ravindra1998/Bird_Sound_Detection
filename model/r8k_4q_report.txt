@@ -1,0 +1,99 @@
+run r8k_4q (8 kHz, 126x40, index 0 = wake-word): 146962 parameters, 10 min training
+TFLite int8: {"input_shape": [1, 1, 126, 40], "input_dtype": "int8", "input_scale": 0.019485294818878174, "input_zero_point": -128, "output_shape": [1, 2], "output_dtype": "int8", "output_scale": 0.00390625, "output_zero_point": -128, "tensor_types": {"int8": 20, "int32": 7}, "ops": ["AVERAGE_POOL_2D", "CONV_2D", "FULLY_CONNECTED", "RESHAPE", "SOFTMAX"], "size_bytes": 163056, "input_matches_bird_preprocess": true, "no_float_tensors": true, "activation_arena_bytes": 30400, "activation_peak_at": "op 2 CONV_2D", "heap_conservative_bytes": 193456, "heap_limit_bytes": 290816, "heap_ok": true}
+
+[val int8 @ 0.5] bird recall 0.9849  false-positive rate 0.0099
+[test int8 @ 0.5] bird recall 0.9831  false-positive rate 0.0112
+
+TEST bird recall per species @ 0.5:
+  board_bird                          142 0.6549
+  Kingfisher                          425 0.9506
+  Peacock                             294 0.9558
+  Babbler                             595 0.9664
+  Cuckoo                              451 0.9712
+  Duck                                606 0.9868
+  Northern Lapwing                    571 0.9877
+  Sparrow                             447 0.9911
+  Lapwing Red-wattled and other       343 0.9913
+  Blue Jay                            384 0.9922
+  Myna                                321 0.9938
+  Common Hoopoe                       174 0.9943
+  Eurasian Jay                        752 0.9947
+  Parrot                              456 0.9956
+  American Robin                      713 0.9958
+  Crow                                306 0.9967
+  Nightingale                         939 0.9979
+  Northern Cardinal                   497 0.9980
+  Eurasian Blackbird                   68 1.0000
+  Thrush Nightingale                  160 1.0000
+  Light-vented Bulbul                 115 1.0000
+  Song Thrush                         412 1.0000
+  Eurasian Golden Oriole              110 1.0000
+
+TEST false-positive rate per not-bird category @ 0.5 (worst first):
+  donkey                               11 0.2727
+  monkey                              133 0.1353
+  elephant                             43 0.1163
+  children_playing                    175 0.1143
+  cat                                1205 0.0805
+  sheep                                15 0.0667
+  dog                                 480 0.0667
+  laughing                            121 0.0496
+  conversation                        453 0.0375
+  chicken                              35 0.0286
+  siren                               348 0.0259
+  lion                                 41 0.0244
+  cow                                  52 0.0192
+  other_sounds                       2749 0.0171
+  frog                               2686 0.0130
+  door_open                            79 0.0127
+  traffic                            1326 0.0113
+  street_music                        188 0.0106
+  music                              2382 0.0097
+  outdoor_ambient                    2656 0.0064
+  drilling                            159 0.0063
+  insects                             162 0.0062
+  silence                            2656 0.0045
+  cricket                            2236 0.0040
+  cicada                              901 0.0033
+  office_ambient                     5463 0.0031
+  thunder                            1037 0.0019
+  rain                                897 0.0011
+  wind                               2729 0.0007
+  office_data                        1639 0.0000
+  pb_silence                          743 0.0000
+  pig                                   3 0.0000
+  podcast                             996 0.0000
+  bear                                  6 0.0000
+  jackhammer                          146 0.0000
+  gun_shot                             37 0.0000
+  glass_breaking                      110 0.0000
+  song                                108 0.0000
+  engine_idling                       178 0.0000
+  table_tap                            84 0.0000
+  dolphin                               5 0.0000
+  clapping                             41 0.0000
+  whistle                              10 0.0000
+  air_conditioner                     195 0.0000
+
+test-recording negatives (extra_neg + insect_frog TEST): 25029 windows, 1800 windows/hour
+  threshold  fp/window  FA/hour    fp 2-of-3  FA/hour   (runs)
+       0.30    0.01834    33.01      0.00894    16.08    13653
+       0.40    0.01251    22.51      0.00542     9.76    13653
+       0.50    0.00863    15.53      0.00293     5.27    13653
+       0.60    0.00579    10.43      0.00176     3.16    13653
+       0.70    0.00400     7.19      0.00117     2.11    13653
+       0.80    0.00276     4.96      0.00073     1.32    13653
+       0.90    0.00128     2.30      0.00022     0.40    13653
+
+OFFICE test session 20261110_110606 (GPX10, 16 kHz board audio decimated): 2692 windows, 1800 windows/hour
+  threshold  fp/window  FA/hour    fp 2-of-3  FA/hour   (runs)
+       0.30    0.00037     0.67      0.00000     0.00        0
+       0.40    0.00000     0.00      0.00000     0.00        0
+       0.50    0.00000     0.00      0.00000     0.00        0
+       0.60    0.00000     0.00      0.00000     0.00        0
+       0.70    0.00000     0.00      0.00000     0.00        0
+       0.80    0.00000     0.00      0.00000     0.00        0
+       0.90    0.00000     0.00      0.00000     0.00        0
+board_birds_test: bird recall 0.6549 (142)
+playback_test: bird recall 0.9732 (1905), false-positive rate 0.0259 (4049)
+new_species_test: bird recall 0.9972 (1791)

@@ -1,0 +1,9 @@
+QAT of r8k_4: 5 epochs, lr 0.0001, 10 min
+
+val   float     @ 0.5: bird recall 0.9780  false-positive rate 0.0063
+val   int8 PTQ  @ 0.5: bird recall 0.9672  false-positive rate 0.0056
+val   int8 QAT  @ 0.5: bird recall 0.9849  false-positive rate 0.0099
+
+test  float     @ 0.5: bird recall 0.9709  false-positive rate 0.0066
+test  int8 PTQ  @ 0.5: bird recall 0.9606  false-positive rate 0.0055
+test  int8 QAT  @ 0.5: bird recall 0.9831  false-positive rate 0.0112
